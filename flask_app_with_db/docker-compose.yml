@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  # Описание приложения
+  app: 
+    build:
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql://flaskuser:flaskpassword@db:5432/flaskdb
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+  # Описание базы данных
+  db:
+    image: postgres:14-alpine 
+    environment:
+      POSTGRES_USER: medvedsckydaniil
+      POSTGRES_PASSWORD: password123d
+      POSTGRES_DB: flaskdb
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+  
